@@ -21,6 +21,7 @@ dependencies = [
 
 [project.scripts]
 novamart-support = "novamart_support.cli:main"
+novamart-seed = "novamart_support.seed:main"
 
 [project.optional-dependencies]
 dev = [
