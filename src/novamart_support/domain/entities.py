@@ -63,3 +63,24 @@ class RefundDecision(BaseModel):
     reason: str
     refund_amount: Decimal | None = Field(default=None, ge=0)
     order_id: str | None = None
+
+
+class RetrieverFailure(BaseModel):
+    """Failure from one policy retrieval source."""
+
+    policy_type: PolicyType
+    message: str
+
+
+class PolicySearchResult(BaseModel):
+    """Combined result from parallel policy retrieval."""
+
+    query: str
+    evidence: list[PolicyEvidence]
+    failures: list[RetrieverFailure] = Field(default_factory=list)
+
+    @property
+    def is_partial(self) -> bool:
+        """Whether one or more retrievers failed."""
+
+        return bool(self.failures)
