@@ -19,6 +19,9 @@ dependencies = [
     "structlog>=25.4,<26.0",
 ]
 
+[project.scripts]
+novamart-support = "novamart_support.cli:main"
+
 [project.optional-dependencies]
 dev = [
     "pytest>=8.4,<9.0",
