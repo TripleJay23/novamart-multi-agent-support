@@ -1,5 +1,10 @@
 """NovaMart specialist agents."""
 
+from novamart_support.agents.communication import (
+    COMMUNICATION_SYSTEM_PROMPT,
+    build_communication_agent,
+    build_communication_tools,
+)
 from novamart_support.agents.inventory import (
     INVENTORY_SYSTEM_PROMPT,
     build_inventory_agent,
@@ -17,9 +22,12 @@ from novamart_support.agents.refund import (
 )
 
 __all__ = [
+    "COMMUNICATION_SYSTEM_PROMPT",
     "INVENTORY_SYSTEM_PROMPT",
     "POLICY_SYSTEM_PROMPT",
     "REFUND_SYSTEM_PROMPT",
+    "build_communication_agent",
+    "build_communication_tools",
     "build_inventory_agent",
     "build_inventory_tools",
     "build_policy_agent",
