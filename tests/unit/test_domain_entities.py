@@ -57,3 +57,14 @@ def test_refund_decision_model() -> None:
 
     assert decision.eligible is True
     assert decision.refund_amount == Decimal("149.99")
+
+
+def test_policy_evidence_accepts_unbounded_non_negative_score() -> None:
+    evidence = PolicyEvidence(
+        policy_type=PolicyType.RETURNS,
+        content="Policy evidence",
+        source="returns-kb",
+        relevance_score=1.25,
+    )
+
+    assert evidence.relevance_score == 1.25

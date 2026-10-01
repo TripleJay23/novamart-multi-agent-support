@@ -54,7 +54,7 @@ class PolicyEvidence(BaseModel):
     policy_type: PolicyType
     content: str
     source: str
-    relevance_score: float | None = Field(default=None, ge=0.0, le=1.0)
+    relevance_score: float | None = Field(default=None, ge=0.0)
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
