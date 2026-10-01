@@ -34,3 +34,6 @@ class PolicyRetrievalError(NovaMartError):
 
 class WorkflowTransitionError(NovaMartError):
     """Raised when a workflow attempts an invalid state or routing transition."""
+
+class AgentExecutionError(NovaMartError):
+    """Raised when typed multi-agent runtime execution fails."""
