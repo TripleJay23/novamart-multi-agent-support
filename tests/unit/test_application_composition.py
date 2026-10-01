@@ -1,6 +1,9 @@
 from typing import Any
 
+import boto3
 import pytest
+from strands import Agent
+from strands.models import BedrockModel
 
 from novamart_support.config import Settings
 from novamart_support.exceptions import ConfigurationError
@@ -8,13 +11,24 @@ from novamart_support.repositories import (
     DynamoDBCustomerRepository,
     DynamoDBOrderRepository,
 )
-from novamart_support.runtime import build_application
+from novamart_support.runtime import (
+    MultiAgentRuntime,
+    build_application,
+)
 from novamart_support.services import (
     InventoryService,
     PolicyService,
     RefundService,
+    WorkflowService,
 )
 from novamart_support.state import DynamoDBWorkflowStateRepository
+from novamart_support.tools import (
+    CommunicationToolHandlers,
+    InventoryToolHandlers,
+    OrchestratorToolHandlers,
+    PolicyToolHandlers,
+    RefundToolHandlers,
+)
 
 
 class FakeBedrockRuntimeClient:
@@ -53,6 +67,22 @@ def make_settings(**overrides: Any) -> Settings:
     return Settings(
         _env_file=None,
         **values,
+    )
+
+
+def build_offline_model(
+    model_id: str,
+) -> BedrockModel:
+    session = boto3.Session(
+        aws_access_key_id="testing",
+        aws_secret_access_key="testing",
+        aws_session_token="testing",
+        region_name="us-east-1",
+    )
+
+    return BedrockModel(
+        boto_session=session,
+        model_id=model_id,
     )
 
 
@@ -120,10 +150,19 @@ def test_application_dependency_graph_is_constructed() -> None:
         GUARDRAIL_VERSION="2",
     )
 
+    orchestrator_model = build_offline_model(
+        settings.orchestrator_model_id
+    )
+    worker_model = build_offline_model(
+        settings.worker_model_id
+    )
+
     container = build_application(
         settings,
         dynamodb_client=object(),
         bedrock_runtime_client=bedrock_client,
+        orchestrator_model=orchestrator_model,
+        worker_model=worker_model,
     )
 
     assert isinstance(
@@ -138,9 +177,67 @@ def test_application_dependency_graph_is_constructed() -> None:
         container.order_repository,
         DynamoDBOrderRepository,
     )
-    assert isinstance(container.inventory_service, InventoryService)
-    assert isinstance(container.refund_service, RefundService)
-    assert isinstance(container.policy_service, PolicyService)
+
+    assert isinstance(
+        container.inventory_service,
+        InventoryService,
+    )
+    assert isinstance(
+        container.refund_service,
+        RefundService,
+    )
+    assert isinstance(
+        container.policy_service,
+        PolicyService,
+    )
+    assert isinstance(
+        container.workflow_service,
+        WorkflowService,
+    )
+
+    assert isinstance(
+        container.inventory_handlers,
+        InventoryToolHandlers,
+    )
+    assert isinstance(
+        container.refund_handlers,
+        RefundToolHandlers,
+    )
+    assert isinstance(
+        container.policy_handlers,
+        PolicyToolHandlers,
+    )
+    assert isinstance(
+        container.communication_handlers,
+        CommunicationToolHandlers,
+    )
+    assert isinstance(
+        container.orchestrator_handlers,
+        OrchestratorToolHandlers,
+    )
+
+    assert isinstance(container.inventory_agent, Agent)
+    assert isinstance(container.refund_agent, Agent)
+    assert isinstance(container.policy_agent, Agent)
+    assert isinstance(container.communication_agent, Agent)
+    assert isinstance(container.orchestrator_agent, Agent)
+
+    assert container.inventory_agent.name == "InventoryAgent"
+    assert container.refund_agent.name == "RefundAgent"
+    assert container.policy_agent.name == "PolicyAgent"
+    assert container.communication_agent.name == "CommunicationAgent"
+    assert container.orchestrator_agent.name == "OrchestratorAgent"
+
+    assert container.inventory_agent.model is worker_model
+    assert container.refund_agent.model is worker_model
+    assert container.policy_agent.model is worker_model
+    assert container.communication_agent.model is worker_model
+    assert container.orchestrator_agent.model is orchestrator_model
+
+    assert isinstance(
+        container.runtime,
+        MultiAgentRuntime,
+    )
 
     result = container.policy_service.search_all(
         "What policies apply?",
@@ -166,3 +263,52 @@ def test_application_dependency_graph_is_constructed() -> None:
         }
         for request in bedrock_client.requests
     )
+
+
+def test_composed_agents_expose_only_their_bounded_tools() -> None:
+    settings = make_settings()
+
+    container = build_application(
+        settings,
+        dynamodb_client=object(),
+        bedrock_runtime_client=FakeBedrockRuntimeClient(),
+        orchestrator_model=build_offline_model(
+            settings.orchestrator_model_id
+        ),
+        worker_model=build_offline_model(
+            settings.worker_model_id
+        ),
+    )
+
+    assert set(
+        container.inventory_agent.tool_registry.registry
+    ) == {
+        "get_customer_profile",
+        "get_order",
+        "list_customer_orders",
+    }
+
+    assert set(
+        container.refund_agent.tool_registry.registry
+    ) == {
+        "evaluate_refund",
+    }
+
+    assert set(
+        container.policy_agent.tool_registry.registry
+    ) == {
+        "search_policies",
+    }
+
+    assert set(
+        container.communication_agent.tool_registry.registry
+    ) == {
+        "get_workflow_context",
+    }
+
+    assert set(
+        container.orchestrator_agent.tool_registry.registry
+    ) == {
+        "start_workflow",
+        "get_next_agent",
+    }
