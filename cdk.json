@@ -1,0 +1,3 @@
+{
+  "app": "uv run --extra dev python -m infrastructure.app"
+}

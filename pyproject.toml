@@ -31,6 +31,8 @@ dev = [
     "ruff>=0.12,<1.0",
     "mypy>=1.17,<2.0",
     "boto3-stubs[dynamodb]>=1.43,<2.0",
+    "aws-cdk-lib==2.272.0",
+    "constructs==10.8.1",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -38,7 +40,7 @@ packages = ["src/novamart_support"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]
+pythonpath = ["src", "."]
 addopts = "-ra"
 
 [tool.ruff]
