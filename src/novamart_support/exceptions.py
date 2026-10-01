@@ -31,3 +31,6 @@ class OrderNotFoundError(NovaMartError):
 
 class PolicyRetrievalError(NovaMartError):
     """Raised when policy evidence cannot be retrieved."""
+
+class WorkflowTransitionError(NovaMartError):
+    """Raised when a workflow attempts an invalid state or routing transition."""
