@@ -1,0 +1,20 @@
+NovaMart | local domain demonstration
+Reference clock: 2026-10-18T12:00:00+00:00
+Real services + in-memory repositories; no AWS or model calls.
+
+CUST-1001 / ORD-1001 | eligible=True  | amount=149.99
+  Order is within the 60-day premium return window.
+CUST-1001 / ORD-1002 | eligible=False | amount=n/a
+  Only delivered orders can be returned for a refund.
+CUST-2001 / ORD-2001 | eligible=False | amount=n/a
+  The standard return window is 30 days and this order was delivered 35 days ago.
+CUST-2001 / ORD-2002 | eligible=False | amount=n/a
+  Order has already been refunded.
+
+Routes from WorkflowService (after orchestrator classification):
+  order: InventoryAgent -> CommunicationAgent
+  return_refund: InventoryAgent -> RefundAgent -> CommunicationAgent
+  policy: PolicyAgent -> CommunicationAgent
+  account: InventoryAgent -> CommunicationAgent
+  calculation: CommunicationAgent
+  general: CommunicationAgent

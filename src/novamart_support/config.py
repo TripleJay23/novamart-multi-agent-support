@@ -9,6 +9,9 @@ from functools import lru_cache
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+DEFAULT_ORCHESTRATOR_MODEL_ID = "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+DEFAULT_WORKER_MODEL_ID = "us.anthropic.claude-sonnet-4-5-20250929-v1:0"
+
 
 class Settings(BaseSettings):
     """NovaMart runtime configuration."""
@@ -37,11 +40,11 @@ class Settings(BaseSettings):
     )
 
     orchestrator_model_id: str = Field(
-        default="us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        default=DEFAULT_ORCHESTRATOR_MODEL_ID,
         alias="ORCHESTRATOR_MODEL_ID",
     )
     worker_model_id: str = Field(
-        default="us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+        default=DEFAULT_WORKER_MODEL_ID,
         alias="WORKER_MODEL_ID",
     )
 

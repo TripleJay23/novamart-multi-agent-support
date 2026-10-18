@@ -1,0 +1,113 @@
+NovaMart local verification
+Date: 2026-10-18 (Africa/Dar_es_Salaam)
+Base code revision: f8616b520aa3ef4e18beec018c20200a5b916c87
+Includes uncommitted policy and AgentCore runtime milestones, application changes,
+container packaging, infrastructure wiring, and associated unit/infrastructure tests.
+Environment: Windows, Python 3.12.13, Node.js v26.7.0, uv 0.11.14
+Scope: local application tests, mocked AWS integration, SDK HTTP contract,
+CDK assertions, static checks, CLI help, and local synthesis.
+No live AWS deployment, model inference, or cloud evaluation was performed.
+
+Executed from the repository root using the existing virtual environment.
+PYTHONPATH=src was set because the existing environment did not expose the package entrypoint.
+
+> .venv/Scripts/python.exe -m pytest -q --junitxml=docs/evidence/pytest-results.xml
+........................................................................ [ 39%]
+........................................................................ [ 78%]
+.......................................                                  [100%]
+183 passed, 1 warning in 19.20s
+Warning: bedrock-agentcore 0.1.7 runtime/app.py:47 calls datetime.utcnow(),
+which emits a DeprecationWarning in the SDK HTTP contract test. Not suppressed.
+Test layers: 150 unit, 13 mocked integration, 20 infrastructure tests.
+JUnit output: docs/evidence/pytest-results.xml
+
+> .venv/Scripts/python.exe -m ruff check .
+All checks passed!
+The initial runtime verification reported I001 import formatting and one E501
+line-length issue. Both were corrected before this final passing run.
+
+> .venv/Scripts/python.exe -m mypy src/novamart_support
+Success: no issues found in 45 source files
+
+> .venv/Scripts/python.exe -m novamart_support --help
+usage: novamart-support [-h] {run,resume} ...
+
+Run or resume NovaMart multi-agent customer-support workflows.
+
+positional arguments:
+  {run,resume}
+    run         Start and execute a new support workflow.
+    resume      Resume an existing persisted workflow.
+
+options:
+  -h, --help    show this help message and exit
+
+> .venv/Scripts/python.exe -m novamart_support.seed --help
+usage: novamart-seed [-h] [--reference-time REFERENCE_TIME] [--json]
+
+Seed NovaMart demo customer and order data.
+
+options:
+  -h, --help            show this help message and exit
+  --reference-time REFERENCE_TIME
+                        ISO-8601 scenario reference time. Defaults to the
+                        current UTC time.
+  --json                Print the seed summary as JSON.
+
+Follow-up checks (same environment and current working tree):
+
+> .venv/Scripts/python.exe docs/evidence/local_demo.py
+Exit code: 0. Full stdout: docs/evidence/local-demo.txt
+
+> .venv/Scripts/python.exe -m ruff check .
+All checks passed!
+Exit code: 0. Includes the entrypoint, infrastructure, tests, and documentation demo.
+
+> .venv/Scripts/python.exe -m infrastructure.app
+Exit code: 0. Four stacks synthesized locally. Final entrypoint verification is recorded below.
+The SDK emitted its untested Node.js version warning for v26.7.0.
+Its warning lists ^24.0.0, ^22.0.0, and deprecated ^20.0.0 as supported release lines.
+The repository declares Node 24.21.0 in .node-version; that version was not tested here.
+No bootstrap, deployment, seeding of live tables, or cloud invocation was performed.
+
+Final synthesis verification after correcting the direct-entrypoint output directory:
+> .venv/Scripts/python.exe -m infrastructure.app
+Exit code: 0. Ruff also passed after the entrypoint change.
+CDK_OUTDIR is honored when supplied; direct runs default to cdk.out.
+Resulting templates were inspected in cdk.out:
+- NovaMartDataStack: 3 DynamoDB tables, 1 S3 bucket, 1 bucket policy.
+- NovaMartPolicyStack: 1 S3 vector bucket, 3 indexes, 3 IAM roles,
+  3 Bedrock Knowledge Bases, and 3 Bedrock data sources.
+- NovaMartImageStack: 1 retained, immutable-tag ECR repository.
+- NovaMartRuntimeStack: 1 execution role, 1 policy, 1 AgentCore HTTP runtime.
+The Node.js untested-version warning remained present.
+Documentation verification: 45 local links/anchors passed; code fences balanced.
+At the initial runtime verification Docker was unavailable on PATH. A subsequent
+Docker verification is recorded below. SDK unit HTTP tests used fake dependencies.
+git diff --check passed.
+
+Docker follow-up (2026-10-18):
+Client/engine: Docker 29.8.2; Docker Desktop 4.94.0; desktop-linux context.
+Builder engine: linux/amd64 with linux/arm64 support.
+Docker binary found in the user's DockerDesktop resources/bin directory.
+
+> docker buildx build --platform linux/arm64 --load --progress plain --iidfile docs/evidence/container-image-id.txt --metadata-file docs/evidence/container-build-metadata.json -t novamart-support:local-arm64 .
+Exit code: 0. Full build transcript and metadata saved alongside this file.
+Local OCI image digest: sha256:af5b7e63a1ab619f1279d1e2baecaa6312157158766a6af3703b188591f4ccd2
+
+> .venv/Scripts/python.exe -m ruff check tool/verify_container.py
+All checks passed!
+Two initial E501 formatting findings were corrected before running the smoke check.
+
+> .venv/Scripts/python.exe tool/verify_container.py --image novamart-support:local-arm64
+Exit code: 0. Seven checks passed; report: docs/evidence/container-smoke.json.
+Image: linux/arm64; machine: aarch64; Python: 3.12.15; UID: 10001.
+Installed application Python source matched the working tree.
+Health endpoint passed. Missing session/query and session override returned invalid_request.
+Missing cloud configuration returned configuration_error without making AWS calls.
+No credentials or mounts supplied; the temporary container was removed.
+No image push, live AWS deployment, or model inference was performed.
+Final follow-up: all 7 checks passed, image/report digests matched, cleanup confirmed;
+54 documentation links/anchors verified, code fences balanced, git diff --check passed.
+Pre-commit refresh: 183 tests passed with the same SDK warning; Ruff passed;
+strict mypy passed across 45 source files. The JUnit report reflects this refresh.

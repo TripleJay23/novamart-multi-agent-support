@@ -9,6 +9,7 @@ from novamart_support.config import get_settings
 from novamart_support.domain import WorkflowState, WorkflowStatus
 from novamart_support.exceptions import NovaMartError
 from novamart_support.runtime import build_application
+from novamart_support.runtime.summary import workflow_summary
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -68,22 +69,6 @@ def _build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _workflow_summary(
-    state: WorkflowState,
-) -> dict[str, object]:
-    """Return a safe CLI-facing workflow summary."""
-
-    return {
-        "session_id": state.session_id,
-        "customer_id": state.customer_id,
-        "request_type": state.request_type.value,
-        "status": state.status.value,
-        "route_history": list(state.route_history),
-        "final_response": state.final_response,
-        "version": state.version,
-    }
-
-
 def _emit_result(
     state: WorkflowState,
     *,
@@ -92,7 +77,7 @@ def _emit_result(
     if json_output:
         print(
             json.dumps(
-                _workflow_summary(state),
+                workflow_summary(state),
                 indent=2,
                 sort_keys=True,
             )

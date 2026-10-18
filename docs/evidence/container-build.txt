@@ -1,0 +1,221 @@
+docker : #0 building with "desktop-linux" instance using docker driver
+At line:2 char:1
++ docker buildx build --platform linux/arm64 --load --progress plain -- ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (#0 building wit...g docker driver:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 691B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#4 [internal] load metadata for ghcr.io/astral-sh/uv:0.11.14
+#4 ...
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#2 DONE 4.1s
+
+#4 [internal] load metadata for ghcr.io/astral-sh/uv:0.11.14
+#4 DONE 4.4s
+
+#5 [internal] load .dockerignore
+#5 transferring context: 156B done
+#5 DONE 0.0s
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 resolve ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97 0.0s
+done
+#6 ...
+
+#7 [internal] load build context
+#7 transferring context: 282.04kB 0.1s done
+#7 DONE 0.1s
+
+#8 [stage-1 1/8] FROM
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+#8 resolve
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+0.0s done
+#8 DONE 0.2s
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 sha256:cffe3885cc20e846b0d354f46f32be21c9b02a15979386b6fe72cf94fb03a73e 0B / 98B 0.2s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 0B / 23.62MB 0.2s
+#6 sha256:cffe3885cc20e846b0d354f46f32be21c9b02a15979386b6fe72cf94fb03a73e 98B / 98B 0.7s done
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 1.05MB / 23.62MB 5.3s
+#6 ...
+
+#8 [stage-1 1/8] FROM
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+#8 sha256:ecbed7df0ff7188fbefa7103723ef4f9602cb01c3485baaa84df6f950e32104b 250B / 250B 0.3s done
+#8 sha256:76294804daeb8e71e4d8fa87aa64b374948e3ad22290ffe08d264ecbb5135440 13.63MB / 15.85MB 6.9s
+#8 sha256:163c741a70d3da9f9cf2dff63f4790528168fad6ecc0b230a84ec48ba7e3cc34 1.05MB / 3.18MB 6.9s
+#8 sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6 1.05MB / 28.14MB 6.9s
+#8 sha256:76294804daeb8e71e4d8fa87aa64b374948e3ad22290ffe08d264ecbb5135440 14.68MB / 15.85MB 7.1s
+#8 ...
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 3.15MB / 23.62MB 10.4s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 5.24MB / 23.62MB 13.7s
+#6 ...
+
+#8 [stage-1 1/8] FROM
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+#8 sha256:76294804daeb8e71e4d8fa87aa64b374948e3ad22290ffe08d264ecbb5135440 15.85MB / 15.85MB 7.8s done
+#8 sha256:163c741a70d3da9f9cf2dff63f4790528168fad6ecc0b230a84ec48ba7e3cc34 3.18MB / 3.18MB 10.2s done
+#8 sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6 10.49MB / 28.14MB 15.6s
+#8 ...
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 6.29MB / 23.62MB 18.8s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 6.29MB / 23.62MB 23.9s
+#6 ...
+
+#8 [stage-1 1/8] FROM
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+#8 sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6 28.14MB / 28.14MB 25.5s done
+#8 extracting sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6
+#8 ...
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 ...
+
+#8 [stage-1 1/8] FROM
+docker.io/library/python:3.12-slim-bookworm@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258
+#8 extracting sha256:c75f989a229d12b2d2613a5997de9ff3546f664c22da9248720033a2410220f6 0.9s done
+#8 extracting sha256:163c741a70d3da9f9cf2dff63f4790528168fad6ecc0b230a84ec48ba7e3cc34 0.1s done
+#8 extracting sha256:76294804daeb8e71e4d8fa87aa64b374948e3ad22290ffe08d264ecbb5135440 0.6s done
+#8 extracting sha256:ecbed7df0ff7188fbefa7103723ef4f9602cb01c3485baaa84df6f950e32104b 0.0s done
+#8 DONE 27.4s
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 8.39MB / 23.62MB 27.7s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 10.49MB / 23.62MB 29.4s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 12.58MB / 23.62MB 30.6s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 14.68MB / 23.62MB 31.5s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 16.78MB / 23.62MB 32.1s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 18.87MB / 23.62MB 32.7s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 20.97MB / 23.62MB 33.4s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 23.07MB / 23.62MB 34.0s
+#6 sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 23.62MB / 23.62MB 34.2s done
+#6 extracting sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c
+#6 extracting sha256:6fdd258c8e52797e266b77ce9bcd4ca342750255a95d99ce89f236da08adff9c 0.3s done
+#6 DONE 34.6s
+
+#6 [uv 1/1] FROM ghcr.io/astral-sh/uv:0.11.14@sha256:1025398289b62de8269e70c45b91ffa37c373f38118d7da036fb8bb8efc85d97
+#6 extracting sha256:cffe3885cc20e846b0d354f46f32be21c9b02a15979386b6fe72cf94fb03a73e 0.0s done
+#6 DONE 34.6s
+
+#9 [stage-1 2/8] COPY --from=uv /uv /usr/local/bin/uv
+#9 DONE 0.4s
+
+#10 [stage-1 3/8] WORKDIR /app
+#10 DONE 0.0s
+
+#11 [stage-1 4/8] COPY pyproject.toml uv.lock ./
+#11 DONE 0.0s
+
+#12 [stage-1 5/8] RUN uv sync --locked --no-dev --no-install-project
+#12 3.302 Using CPython 3.12.15 interpreter at: /usr/local/bin/python3
+#12 3.306 Creating virtual environment at: .venv
+#12 3.439 Resolved 90 packages in 50ms
+#12 5.091 Downloading botocore (15.2MiB)
+#12 5.105 Downloading pydantic-core (1.9MiB)
+#12 5.123 Downloading cryptography (4.5MiB)
+#12 9.406  Downloaded pydantic-core
+#12 11.12  Downloaded cryptography
+#12 15.40  Downloaded botocore
+#12 15.41 Prepared 52 packages in 11.91s
+#12 16.65 Installed 52 packages in 1.24s
+#12 16.66  + annotated-types==0.8.0
+#12 16.66  + anyio==4.15.1
+#12 16.66  + attrs==26.1.0
+#12 16.66  + bedrock-agentcore==0.1.7
+#12 16.66  + boto3==1.43.106
+#12 16.66  + botocore==1.43.106
+#12 16.66  + certifi==2026.7.22
+#12 16.66  + cffi==2.1.1
+#12 16.66  + click==8.5.0
+#12 16.66  + cryptography==50.0.2
+#12 16.66  + docstring-parser==0.18.0
+#12 16.66  + h11==0.16.0
+#12 16.66  + httpcore==1.0.9
+#12 16.66  + httpcore2==2.13.1
+#12 16.66  + httpx==0.28.1
+#12 16.66  + httpx2==2.13.1
+#12 16.66  + idna==3.20
+#12 16.66  + jmespath==1.1.0
+#12 16.66  + jsonschema==4.26.0
+#12 16.66  + jsonschema-specifications==2025.9.1
+#12 16.67  + mcp==2.1.1
+#12 16.67  + mcp-types==2.1.1
+#12 16.67  + opentelemetry-api==1.45.0
+#12 16.67  + opentelemetry-instrumentation==0.66b0
+#12 16.67  + opentelemetry-instrumentation-threading==0.66b0
+#12 16.67  + opentelemetry-sdk==1.45.0
+#12 16.67  + opentelemetry-semantic-conventions==0.66b0
+#12 16.67  + packaging==26.3
+#12 16.67  + pycparser==3.0
+#12 16.67  + pydantic==2.13.5
+#12 16.67  + pydantic-core==2.46.5
+#12 16.67  + pydantic-settings==2.15.0
+#12 16.67  + pyjwt==2.15.1
+#12 16.67  + python-dateutil==2.9.0.post0
+#12 16.67  + python-dotenv==1.2.3
+#12 16.67  + python-multipart==0.0.32
+#12 16.67  + pyyaml==6.0.3
+#12 16.67  + referencing==0.37.0
+#12 16.67  + rpds-py==2026.6.3
+#12 16.67  + s3transfer==0.19.2
+#12 16.67  + six==1.17.0
+#12 16.67  + sse-starlette==3.5.0
+#12 16.67  + starlette==1.7.0
+#12 16.67  + strands-agents==1.57.1
+#12 16.67  + structlog==25.5.0
+#12 16.67  + truststore==0.10.4
+#12 16.67  + typing-extensions==4.16.0
+#12 16.67  + typing-inspection==0.4.4
+#12 16.67  + urllib3==2.8.0
+#12 16.67  + uvicorn==0.54.0
+#12 16.67  + watchdog==6.0.0
+#12 16.67  + wrapt==2.5.0
+#12 DONE 16.9s
+
+#13 [stage-1 6/8] COPY README.md ./
+#13 DONE 0.1s
+
+#14 [stage-1 7/8] COPY src/ ./src/
+#14 DONE 0.1s
+
+#15 [stage-1 8/8] RUN uv sync --locked --no-dev --no-editable     && groupadd --gid 10001 novamart     && useradd
+--uid 10001 --gid 10001 --create-home novamart
+#15 2.952 Resolved 90 packages in 84ms
+#15 3.049    Building novamart-multi-agent-support @ file:///app
+#15 21.16       Built novamart-multi-agent-support @ file:///app
+#15 21.22 Prepared 1 package in 18.20s
+#15 21.25 Installed 1 package in 32ms
+#15 21.25  + novamart-multi-agent-support==0.1.0 (from file:///app)
+#15 DONE 21.7s
+
+#16 exporting to image
+#16 exporting layers
+#16 exporting layers 6.0s done
+#16 exporting manifest sha256:37848c2522939debf02605ea3627cc0607391590371f41577672f1f0e6ed361e 0.0s done
+#16 exporting config sha256:22a1d4356141d6d7366fb363aee5d393ac11f4b10fb0e4b135188a4e590e2623 0.0s done
+#16 exporting attestation manifest sha256:854d7df25081f4db3c9c067ba6ecb7b86ef28fd56323a703235edcd09451f20b 0.0s done
+#16 exporting manifest list sha256:af5b7e63a1ab619f1279d1e2baecaa6312157158766a6af3703b188591f4ccd2 0.0s done
+#16 naming to docker.io/library/novamart-support:local-arm64
+#16 naming to docker.io/library/novamart-support:local-arm64 done
+#16 DONE 6.2s
+
+#17 resolving provenance for metadata file
+#17 DONE 0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/2786er6iein054gobkfpzuqu8
