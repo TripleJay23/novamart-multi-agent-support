@@ -1,9 +1,45 @@
 # NovaMart evidence index
 
-This directory records local verification separately from the cloud evidence still
-needed for release. All current records use synthetic data.
+This directory records local verification separately from live AWS evidence. All current
+records use synthetic data. The [cloud deployment record](cloud-deployment.md) and
+[sanitized JSON](cloud-verification.json) cover foundation deployment, source ingestion,
+retrieval, seeding, the pushed release image, and unresolved scan findings.
 
-## Local verification snapshot
+## Latest communication-grounding milestone
+
+The current working tree passes **195 tests** (161 unit, 14 mocked integration, 20
+infrastructure), Ruff, and strict mypy. Five live Bedrock CommunicationAgent cases also
+passed their focused lexical and context-use checks. These are separate evidence layers;
+human review and broader semantic evaluation remain pending.
+
+See the [milestone record](communication-grounding.md), [live responses](communication-eval.json),
+[historical defect reassessment](communication-baseline.json), [JUnit](pytest-communication.xml),
+and [verification transcript](communication-verification.txt). The
+[dataset and runner guide](../../evals/README.md) explains reproduction and limits.
+The numeric-serialization snapshot below remains preserved as earlier evidence.
+
+## Earlier Decimal-repair working-tree verification
+
+After the cloud-backed refund check exposed a DynamoDB Decimal serialization failure,
+the prompt boundary was repaired and covered by a repository/runtime regression test.
+The working tree based on `8a95621` now has **184 passing tests**: 150 unit, 14 mocked
+integration, and 20 infrastructure tests, with the existing SDK warning. Ruff and strict
+mypy passed. This repair and the following evidence remain uncommitted.
+
+- [Fresh JUnit report](pytest-decimal-fix.xml) and [verification transcript](decimal-fix-verification.txt).
+- [Three live AWS-backed application scenarios](live-application.json): policy, refund,
+  and order; persisted summaries and terminal resumes match. Execution was local, not
+  hosted on AgentCore, and used the developer identity rather than the runtime role.
+- [Corrected ARM64 container report](container-decimal-fix-smoke.json): seven passing
+  checks and temporary-container cleanup. The corrected image was pushed separately as
+  `8a95621-decimal-fix`; its scan still reports seven HIGH findings.
+- [Cloud record](cloud-deployment.md): all successful results, the retained failed
+  refund baseline, three denied runtime attempts, and answer-quality limitations.
+
+The earlier 183-test and original-container records below are preserved as a historical
+snapshot; they do not include the numeric serialization repair.
+
+## Earlier local verification snapshot
 
 - **Date:** 18 October 2026, Africa/Dar_es_Salaam.
 - **Code base revision:** `f8616b520aa3ef4e18beec018c20200a5b916c87`, plus the
@@ -70,7 +106,9 @@ results. Update the README's counts and dates when publishing a new snapshot.
 
 The SDK HTTP test emits one `datetime.utcnow()` deprecation warning from installed
 `bedrock-agentcore` 0.1.7. The warning was not suppressed. Container build and local smoke
-checks subsequently passed; no ECR push or AgentCore deployment was performed.
+checks subsequently passed. That local snapshot preceded the
+[cloud deployment record](cloud-deployment.md), which documents the later ECR push and
+the actual runtime deployment outcome.
 
 ## Container verification
 
@@ -107,8 +145,10 @@ the digest returned by ECR for the selected release image before runtime deploym
 
 ## Cloud evidence to capture
 
-No items in this table have been captured for NovaMart in this package. These are
-acceptance targets, not claims of implemented or passing cloud behavior.
+Foundation deployment, three policy ingestions, direct retrieval, seeding, and the ECR
+release image are now captured in the [cloud deployment record](cloud-deployment.md).
+The table below lists broader acceptance targets; those records do not establish that
+every target has passed.
 
 | Capture | Required supporting record | What a reviewer should verify |
 | --- | --- | --- |

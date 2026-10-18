@@ -317,16 +317,12 @@ class MultiAgentRuntime:
         state: WorkflowState,
         agent_name: str,
     ) -> str:
-        payload = {
-            "session_id": state.session_id,
-            "customer_id": state.customer_id,
-            "original_query": state.original_query,
-            "request_type": state.request_type.value,
-            "route_history": state.route_history,
-            "inventory_context": state.inventory_context,
-            "policy_context": state.policy_context,
-            "refund_context": state.refund_context,
-        }
+        # DynamoDB restores nested numbers as Decimal. Use the model's JSON
+        # boundary so exact values are supported without float conversion.
+        payload = state.model_dump(mode="json", include={
+            "session_id", "customer_id", "original_query", "request_type",
+            "route_history", "inventory_context", "policy_context", "refund_context",
+        })
 
         return (
             f"Execute the {agent_name} responsibility for this NovaMart "

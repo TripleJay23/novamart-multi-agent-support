@@ -4,7 +4,7 @@
 
 [![Python 3.12](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)](pyproject.toml)
 [![Status: in development](https://img.shields.io/badge/Status-in_development-amber)](#implementation-status)
-[![Local verification](https://img.shields.io/badge/Local_tests-183_passed-22863A)](docs/evidence/README.md)
+[![Local verification](https://img.shields.io/badge/Local_tests-195_passed-22863A)](docs/evidence/pytest-communication.xml)
 
 NovaMart is a Python customer-support system for an example retailer. Five Strands agents
 coordinate customer and order lookups, policy questions, refund eligibility, and final
@@ -14,7 +14,10 @@ customer records, orders, and versioned workflow state.
 The goal is a reproducible, observable support service hosted on **Amazon Bedrock AgentCore**.
 The current repository implements the application core, an AWS-backed CLI, an AgentCore
 HTTP entrypoint, and CDK data, policy, image-registry, and runtime stacks. The ARM64 container
-has passed local build and smoke checks; a live cloud deployment remains on the completion roadmap.
+has passed local build and smoke checks. The data, image-registry, and policy stacks are deployed;
+live policy ingestion and retrieval passed. Three AWS-backed application smoke scenarios
+also passed after a Decimal-serialization repair. AgentCore creation remains denied;
+hosted acceptance is pending.
 
 [Vision](#vision) · [Architecture](#architecture) · [Quick start](#quick-start) ·
 [Evidence](#evidence-and-verification) · [Roadmap](#completion-roadmap)
@@ -41,13 +44,13 @@ agents should earn their place through a concrete operational need.
 
 | Area | Present in this repository | Remaining work |
 | --- | --- | --- |
-| Agents and execution | Five Strands agent builders, bounded tools, typed outputs, deterministic route enforcement, and a bounded execution loop | Live model and end-to-end cloud evaluation |
-| Persistence | DynamoDB adapters for customers, orders, and optimistic-locking workflow state; in-memory adapters for tests | Deployed-service verification and operational policies |
-| Policy retrieval | Concurrent KB adapters; evidence ranking, deduplication, and source-failure reporting; versioned demo policies and CDK KB/vector-store definitions | Live provisioning, ingestion, owner-approved commercial policies, and retrieval evaluation |
+| Agents and execution | Five Strands agent builders, bounded tools, typed outputs, and deterministic routing; three live AWS-backed smoke scenarios passed | Hosted acceptance and broader end-to-end evaluation |
+| Persistence | DynamoDB adapters and optimistic locking; live workflow summaries match persisted records and terminal resume results | Hosted-role verification, concurrency failure injection, and operational policies |
+| Policy retrieval | Concurrent KB adapters, evidence ranking/deduplication, and source-failure reporting; all three deployed KBs ingested and retrieved demo sources successfully | Owner-approved commercial policies, generated-answer evaluation, and failure-injection checks |
 | Refund eligibility | Deterministic tier-based rules and decimal arithmetic | Any payment/refund execution integration; the current service evaluates eligibility only |
-| CLI and sample data | New-workflow and resume commands, JSON summaries, non-overwriting demo seeding | Deployed workflow recordings and reviewer walkthrough |
-| Hosted entrypoint | SDK HTTP handler, validated payloads, context-owned sessions, fresh agents, sanitized errors; ARM64 image built and smoke-tested locally | ECR push and live endpoint acceptance |
-| Infrastructure | CDK data and policy stacks; retained ECR repository; digest-selected AgentCore runtime with scoped execution permissions | Live deployment, guardrail, and full observability infrastructure |
+| CLI and sample data | New-workflow and resume commands, JSON summaries, non-overwriting demo seeding | Hosted workflow recordings and reviewer walkthrough |
+| Hosted entrypoint | SDK HTTP handler, validated payloads, context-owned sessions, fresh agents, sanitized errors; ARM64 image smoke-tested and pushed to ECR | Runtime creation permission dependency and live endpoint acceptance |
+| Infrastructure | Data, policy, and ECR stacks deployed; digest-selected AgentCore runtime defined with scoped execution permissions | Runtime acceptance, guardrail, and full observability infrastructure |
 | Safety | Tool boundaries, validation, controlled errors, and optional retrieval guardrail configuration | Guardrails across model interactions, adversarial evaluation, authentication, and authorization |
 | Observability | Session IDs, route history, versioned state, and configuration fields | Structured logging, tracing, dashboards, and alarms; the observability package is currently empty |
 | Delivery | Local test, lint, type-check, and infrastructure evidence | CI workflow, deployment automation, and release evidence |
@@ -290,7 +293,17 @@ a future customer-facing UI.
 
 ## Evidence and verification
 
-The local verification snapshot below was captured on **18 October 2026** against the
+The latest working tree passes **195 tests**, Ruff, and strict mypy after repairing
+numeric context serialization and tightening communication grounding. A versioned live
+evaluation passed **five focused cases** for supported and missing currency/estimate facts.
+See the [grounding evidence](docs/evidence/communication-grounding.md),
+[fresh verification](docs/evidence/communication-verification.txt), and
+[JUnit report](docs/evidence/pytest-communication.xml). These changes remain uncommitted
+on top of `8a95621`. The earlier
+[three AWS-backed workflow checks](docs/evidence/live-application.json) preceded the
+new communication prompt; their evidence is preserved separately.
+
+The original pre-deployment verification snapshot below was captured on **18 October 2026** against the
 working tree based on revision [`f8616b5`](https://github.com/TripleJay23/novamart-multi-agent-support/commit/f8616b520aa3ef4e18beec018c20200a5b916c87),
 including the uncommitted policy-infrastructure and AgentCore runtime milestones.
 These are local checks, not deployment or model-quality results.
@@ -310,8 +323,14 @@ These are local checks, not deployment or model-quality results.
 
 The local image `novamart-support:local-arm64` ran through Docker Desktop's ARM64 emulation
 on an amd64 engine. Its installed application source hash matches the working tree.
-These checks made no AWS calls. Image push, runtime deployment, ingested-policy queries,
-and live inference remain pending.
+These local checks made no AWS calls. A subsequent clean-revision image was pushed to ECR.
+All three policy sources were ingested and retrieved successfully in AWS. The repaired
+working tree completed policy, refund, and order scenarios with matching persisted state
+and unchanged terminal resumes. Its corrected ARM64 image passed seven checks and was
+pushed as `8a95621-decimal-fix`. Hosted runtime acceptance remains pending after three
+creation denials. See the
+[cloud deployment evidence](docs/evidence/cloud-deployment.md) for observed results and
+unresolved image-scan findings.
 
 ### Local demonstration
 
@@ -380,13 +399,19 @@ novamart-multi-agent-support/
 ## Completion roadmap
 
 1. **Verify the AWS data and policy environment.** The data/policy stack definitions,
-   demo documents, and ingestion runbook are implemented and locally tested. Deploy them,
-   ingest all three sources, and verify permissions and model access. Record the seed run
-   and retrieval results before marking this milestone accepted in AWS.
+   demo documents, and ingestion runbook are implemented. Foundation deployment, all three
+   policy ingestions, direct source retrieval, and non-overwriting seeding are verified in
+   [AWS evidence](docs/evidence/cloud-deployment.md). Generated-answer evaluation and
+   hosted-role access remain separate checks. Three locally executed AWS-backed workflows
+   have also passed smoke checks.
 2. **Verify hosted execution on AgentCore.** The runtime entrypoint, deployment stacks,
    scoped execution role, session mapping, and invocation examples are implemented.
-   The ARM64 image has passed local build and smoke checks. Push a verified release image
-   and deploy it by digest, then capture a real workflow.
+   The ARM64 image has passed local build and smoke checks and was pushed to ECR.
+   The latest working-tree image is available as `8a95621-communication-v1`. Runtime
+   creation remains denied after three attempts; the account administrator must inspect
+   the blocked CloudTrail event before another permission change. Capture a hosted
+   workflow after deployment succeeds.
+   Resolve the recorded high-severity OS-package scan findings before release.
    Decide whether AgentCore Memory is needed alongside workflow persistence.
 3. **Complete safety and access controls.** Apply guardrails consistently to model
    interactions, establish authenticated customer identity and order authorization,
@@ -394,9 +419,10 @@ novamart-multi-agent-support/
 4. **Make failures observable.** Implement structured logs and traces with session
    correlation, redaction, latency/error metrics, and alarms; prove retriever failure
    and workflow concurrency behavior in the deployed environment.
-5. **Automate acceptance.** Add CI, cloud smoke tests, and a versioned evaluation dataset
-   for order status, account, refund, policy, calculation, missing-data, and partial-failure
-   flows. Measure answer quality and operational behavior with explicit acceptance criteria.
+5. **Automate acceptance.** A [versioned communication regression](evals/README.md) now
+   covers five focused cases using real Bedrock and in-memory context. Expand it into
+   end-to-end order, account, refund, policy, calculation, missing-data, and partial-failure
+   evaluations, then add CI and hosted smoke checks with explicit acceptance criteria.
 6. **Publish the finished evidence package.** Capture reproducible live CLI sessions,
    sanitized console screenshots, state records, guardrail assessments, traces, and raw
    evaluation results. Add a release walkthrough and deployment/cleanup instructions.

@@ -1,0 +1,23 @@
+Isolated linux/arm64 candidate container; fresh apt-get update, apt-cache policy and simulated upgrade on 18 October 2026. No image mutation or upgrade was performed.
+
+util-linux:
+  Installed: 2.38.1-5+deb12u3
+  Candidate: 2.38.1-5+deb12u3
+  Version table:
+ *** 2.38.1-5+deb12u3 500
+        500 http://deb.debian.org/debian bookworm/main arm64 Packages
+        100 /var/lib/dpkg/status
+     2.38.1-5+deb12u1 500
+        500 http://deb.debian.org/debian-security bookworm-security/main arm64 Packages
+zlib1g:
+  Installed: 1:1.2.13.dfsg-1
+  Candidate: 1:1.2.13.dfsg-1
+  Version table:
+ *** 1:1.2.13.dfsg-1 500
+        500 http://deb.debian.org/debian bookworm/main arm64 Packages
+        100 /var/lib/dpkg/status
+Reading package lists...
+Building dependency tree...
+Reading state information...
+Calculating upgrade...
+0 upgraded, 0 newly installed, 0 to remove and 0 not upgraded.

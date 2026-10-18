@@ -2,8 +2,10 @@
 
 This runbook prepares the existing data stack and three Bedrock Knowledge Bases.
 It does not deploy AgentCore or apply guardrails to model calls. The infrastructure
-has local synthesis and assertion coverage; live creation, ingestion, and retrieval
-must be recorded separately before claiming cloud acceptance.
+has local synthesis and assertion coverage. A subsequent
+[cloud evidence record](../evidence/cloud-deployment.md) verifies foundation creation,
+all three ingestions, and direct retrieval on 18 October 2026. Repeat those checks for
+each new environment; hosted application acceptance remains separate.
 
 ## Resources and boundaries
 

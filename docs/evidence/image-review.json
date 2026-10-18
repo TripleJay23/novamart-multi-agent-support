@@ -1,0 +1,354 @@
+{
+  "captured_date": "2026-10-18",
+  "scope": "ECR scan comparison and local container checks; no runtime deployment or production risk acceptance.",
+  "bookworm_decimal_candidate": {
+    "application_manifest_digest": "sha256:4acc57caa9d4852ff4e5226407c03450876d373a33769b10853df57273307081",
+    "scan_status": "COMPLETE",
+    "severity_counts": {
+      "HIGH": 7,
+      "MEDIUM": 4,
+      "LOW": 2
+    },
+    "findings": [
+      {
+        "id": "CVE-2026-78408",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-97399",
+        "severity": "LOW",
+        "packages": {
+          "package_version": "2.36-9+deb12u14",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-78409",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-53613",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-85091",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "1.2.13.dfsg-1",
+          "package_name": "zlib"
+        }
+      },
+      {
+        "id": "CVE-2026-85977",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "1.3.3+ds-1",
+          "package_name": "libtirpc"
+        }
+      },
+      {
+        "id": "CVE-2026-86805",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.36-9+deb12u14",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-76642",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-78410",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-13595",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      },
+      {
+        "id": "CVE-2026-95818",
+        "severity": "LOW",
+        "packages": {
+          "package_version": "2.36-9+deb12u14",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-85231",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "1.3.3+ds-1",
+          "package_name": "libtirpc"
+        }
+      },
+      {
+        "id": "CVE-2026-53615",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.38.1-5+deb12u3",
+          "package_name": "util-linux"
+        }
+      }
+    ]
+  },
+  "experimental_trixie_communication_candidate": {
+    "application_manifest_digest": "sha256:778d4433ec5b68f1baa2f39e3a00951d2c1fe09c429066b219f585f55dde3044",
+    "scan_status": "COMPLETE",
+    "severity_counts": {
+      "HIGH": 3,
+      "MEDIUM": 9,
+      "LOW": 3
+    },
+    "findings": [
+      {
+        "id": "CVE-2026-18374",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-89092",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-6791",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-8674",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-6238",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-95818",
+        "severity": "LOW",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-5435",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-19542",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-97399",
+        "severity": "LOW",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-80489",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-6368",
+        "severity": "LOW",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-86805",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-85091",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "1.3.dfsg+really1.3.1-1",
+          "package_name": "zlib"
+        }
+      },
+      {
+        "id": "CVE-2026-77117",
+        "severity": "MEDIUM",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      },
+      {
+        "id": "CVE-2026-19499",
+        "severity": "HIGH",
+        "packages": {
+          "package_version": "2.41-12+deb13u4",
+          "package_name": "glibc"
+        }
+      }
+    ]
+  },
+  "removed_scan_entries": [
+    {
+      "id": "CVE-2026-13595",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-53613",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-53615",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-76642",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-78408",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-78409",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-78410",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-85231",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-85977",
+      "severity": "MEDIUM"
+    }
+  ],
+  "added_scan_entries": [
+    {
+      "id": "CVE-2026-18374",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-19499",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-19542",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-5435",
+      "severity": "HIGH"
+    },
+    {
+      "id": "CVE-2026-6238",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-6368",
+      "severity": "LOW"
+    },
+    {
+      "id": "CVE-2026-6791",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-77117",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-80489",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-8674",
+      "severity": "MEDIUM"
+    },
+    {
+      "id": "CVE-2026-89092",
+      "severity": "MEDIUM"
+    }
+  ],
+  "trixie_vendor_unresolved": [
+    {
+      "id": "CVE-2026-78408",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78408"
+    },
+    {
+      "id": "CVE-2026-78409",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78409"
+    },
+    {
+      "id": "CVE-2026-78410",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410"
+    },
+    {
+      "id": "CVE-2026-76642",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-76642"
+    }
+  ],
+  "decision": "Do not adopt the Trixie base. Lower reported HIGH count alone does not establish remediation; two new HIGH glibc entries, more MEDIUM entries, and unresolved vendor util-linux entries remain. Repository Dockerfile is unchanged.",
+  "experimental_index_digest": "sha256:926a8a490a8cc5517112c39960f0e6093f15356d3c126ef001b9067e661b2425"
+}

@@ -1,0 +1,31 @@
+{
+  "scope": "Reassessment of two historical full-workflow answers, not a controlled A/B comparison with the new fixture-only evaluation.",
+  "source": "live-application.json",
+  "cases": [
+    {
+      "case_id": "refund_currency_missing",
+      "response": "Hello <demo customer>,\n\nThank you for contacting NovaMart support.\n\nI've reviewed your order ORD-1001 for the Wireless Headphones Pro. You are **eligible for a refund** of **$149.99**.\n\nYour order was delivered on September 21, 2026, and as a premium tier customer, you have a 60-day return window. Your request falls within this timeframe.\n\nAs requested, I have not processed the refund payment at this time. When you're ready to proceed with the return and refund, please let us know and we'll be happy to assist you with the next steps.\n\nIf you have any questions, feel free to reach out.\n\nBest regards,  \nNovaMart Customer Support",
+      "passed": false,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:amount": true,
+        "required:eligible": true,
+        "required:currency_limitation": false,
+        "forbidden:invented_currency": false
+      }
+    },
+    {
+      "case_id": "delivery_estimate_missing",
+      "response": "Hello <demo customer>,\n\nThank you for contacting NovaMart regarding your order ORD-1002.\n\nYour Smart Watch Series 5 is currently **shipped** and on its way to you. The order was placed on September 28, 2026, and is in transit for delivery.\n\nYou should receive your item soon. If you have any questions or need further assistance once your order arrives, please don't hesitate to reach out.\n\nBest regards,  \nNovaMart Customer Support",
+      "passed": false,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:status": true,
+        "required:estimate_limitation": false,
+        "forbidden:unsupported_prediction": false
+      }
+    }
+  ]
+}

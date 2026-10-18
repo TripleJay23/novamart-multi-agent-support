@@ -2,8 +2,10 @@
 
 The runtime entrypoint and CDK definitions are implemented and locally tested. The ARM64
 image build and local container smoke checks passed on 18 October 2026; see the
-[container evidence](../evidence/README.md#container-verification). ECR push, runtime
-deployment, and live inference remain separate cloud acceptance gates.
+[container evidence](../evidence/README.md#container-verification). A clean-revision
+release image has since been pushed to ECR. Runtime creation was denied and hosted
+inference remains unverified; see the [cloud evidence](../evidence/cloud-deployment.md)
+for permission diagnostics and unresolved image-scan findings.
 
 ## Runtime contract
 
@@ -202,6 +204,32 @@ Require `ok: true`, the expected route, a grounded answer, and a matching persis
 workflow record. Verify invalid payloads and missing sessions produce controlled errors.
 Capture the [cloud evidence](../evidence/README.md#cloud-evidence-to-capture) before marking
 AgentCore deployment accepted.
+
+## Diagnose a denied runtime creation
+
+For a generic CloudFormation `AccessDenied`, inspect the underlying CloudTrail
+management event using an identity permitted by the account's organization policy:
+
+1. Open the [CloudTrail console](https://console.aws.amazon.com/cloudtrail/) in
+   **US East (N. Virginia), `us-east-1`** and choose **Event history**.
+2. Clear the existing lookup filter if necessary. Select **Event name**, enter the
+   exact value `CreateAgentRuntime`, and apply the filter.
+3. Choose an **Absolute range**. For the recorded failed attempts, select 18 October
+   2026, **11:55–12:10 UTC**. In Dar es Salaam this is **14:55–15:10**. The console
+   defaults to UTC; check its selected time zone before entering a range.
+4. Open the events near **11:57:45, 12:02:10, and 12:07:25 UTC**, then view
+   **Event record**. Confirm `requestParameters.agentRuntimeName` is
+   `novamart_support` when that field is available.
+5. Inspect `errorCode` and `errorMessage`. Keep the exact denied action, resource
+   type, and condition, while redacting account IDs, session details, and ARNs in
+   shared excerpts. If runtime creation has no error, inspect related failed
+   events in the same interval before changing permissions.
+
+If Event history itself returns access denied, an authorized administrator must
+perform the lookup. An organization-level explicit deny cannot be repaired by
+adding an allow policy to the current role. The recorded operator profile is
+subject to such a deny. Do not create a new trail merely to search these recent
+management events. See [AWS's Event history instructions](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html).
 
 ## Cleanup and rollback
 

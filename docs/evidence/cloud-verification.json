@@ -1,0 +1,300 @@
+{
+  "captured_at": "2026-10-18T12:17:47.612371+00:00",
+  "revision": "8a95621420a0b5ae4ea9fdff4e52993ad4abc732",
+  "region": "us-east-1",
+  "data_kind": "synthetic demonstration data",
+  "foundation": {
+    "NovaMartDataStack": "UPDATE_COMPLETE",
+    "NovaMartPolicyStack": "CREATE_COMPLETE",
+    "NovaMartImageStack": "CREATE_COMPLETE"
+  },
+  "policies": {
+    "returns": {
+      "source_key": "policies/returns/returns-v1.md",
+      "source_sha256": "0c59d24e78f5fa6d719a66e864475be4d854ba088369f81f84ebb258420d6b3e",
+      "versioned_upload": true,
+      "ingestion_status": "COMPLETE",
+      "ingestion_statistics": {
+        "numberOfDocumentsScanned": 1,
+        "numberOfMetadataDocumentsScanned": 0,
+        "numberOfNewDocumentsIndexed": 1,
+        "numberOfModifiedDocumentsIndexed": 0,
+        "numberOfMetadataDocumentsModified": 0,
+        "numberOfDocumentsDeleted": 0,
+        "numberOfDocumentsFailed": 0,
+        "numberOfDocumentsSkipped": 0
+      },
+      "retrieval_query": "What is the premium customer return window?",
+      "source_isolation_verified": true,
+      "retrieved_chunks": [
+        {
+          "text": "# NovaMart demonstration returns policy Policy version: demo-1.0. Effective reference: 18 October 2026. This is synthetic policy content for the NovaMart portfolio application. ## Return windows Standard customers have a 30-day return window from delivery. Premium customers have a 60-day return window from delivery. The current eligibility service uses whole elapsed days and rejects an order when elapsed days exceed its tier's window. ## Eligibility requirements An order must have delivered status, a recorded delivery date that is not in the future, and its return eligibility flag enabled. An already refunded order is ineligible. Shipped orders that have not been delivered are ineligible for a return refund. Missing order or customer information must be retrieved before a customer-specific eligibility decision can be made. ## Amount and action boundaries For an eligible order, the demonstrated refund amount is unit price multiplied by quantity. The application evaluates eligibility; it does not transfer funds, change the order status, arrange collection, or generate a return label. Do not tell the customer a refund has been issued based only on this policy.",
+          "score": 0.758673369884491,
+          "source": "s3://<policy-bucket>/policies/returns/returns-v1.md"
+        }
+      ]
+    },
+    "shipping": {
+      "source_key": "policies/shipping/shipping-v1.md",
+      "source_sha256": "8e2068aacb86ea0c87ad8521dea74d4de09843d063baac83628d2d1b2d2855fd",
+      "versioned_upload": true,
+      "ingestion_status": "COMPLETE",
+      "ingestion_statistics": {
+        "numberOfDocumentsScanned": 1,
+        "numberOfMetadataDocumentsScanned": 0,
+        "numberOfNewDocumentsIndexed": 1,
+        "numberOfModifiedDocumentsIndexed": 0,
+        "numberOfMetadataDocumentsModified": 0,
+        "numberOfDocumentsDeleted": 0,
+        "numberOfDocumentsFailed": 0,
+        "numberOfDocumentsSkipped": 0
+      },
+      "retrieval_query": "What delivery times and shipping fees are guaranteed?",
+      "source_isolation_verified": true,
+      "retrieved_chunks": [
+        {
+          "text": "# NovaMart demonstration shipping policy Policy version: demo-1.0. Effective reference: 18 October 2026. This is synthetic policy content for the NovaMart portfolio application, not a published commercial shipping commitment. ## Shipping questions Order-specific shipping status must come from the customer's stored order record. A shipped status indicates dispatch; it does not prove delivery. A delivered status must not be described as a live carrier tracking event. ## Limits of the demonstration This demonstration policy does not define shipping prices, delivery estimates, express service levels, geographic coverage, or carrier tracking links. If a customer asks for any of these details, explain that the available policy does not provide them. Do not invent a fee, date, carrier, or tracking number. The application does not currently buy shipping labels, change delivery addresses, schedule deliveries, or contact carriers. A response must not claim those actions have been completed.",
+          "score": 0.620502769947052,
+          "source": "s3://<policy-bucket>/policies/shipping/shipping-v1.md"
+        }
+      ]
+    },
+    "warranty": {
+      "source_key": "policies/warranty/warranty-v1.md",
+      "source_sha256": "23551112f6da46113de5ee3081c4ea43bbb0099c60748d9d6b38e380ae97a23d",
+      "versioned_upload": true,
+      "ingestion_status": "COMPLETE",
+      "ingestion_statistics": {
+        "numberOfDocumentsScanned": 1,
+        "numberOfMetadataDocumentsScanned": 0,
+        "numberOfNewDocumentsIndexed": 1,
+        "numberOfModifiedDocumentsIndexed": 0,
+        "numberOfMetadataDocumentsModified": 0,
+        "numberOfDocumentsDeleted": 0,
+        "numberOfDocumentsFailed": 0,
+        "numberOfDocumentsSkipped": 0
+      },
+      "retrieval_query": "What warranty coverage and duration are guaranteed?",
+      "source_isolation_verified": true,
+      "retrieved_chunks": [
+        {
+          "text": "# NovaMart demonstration warranty policy Policy version: demo-1.0. Effective reference: 18 October 2026. This is synthetic policy content for the NovaMart portfolio application, not a manufacturer warranty or a published commercial warranty commitment. ## Warranty questions Warranty entitlement depends on the applicable product or manufacturer terms. This demonstration dataset contains no verified warranty durations, coverage categories, exclusions, repair commitments, or replacement guarantees. If asked what a warranty covers or how long it lasts, explain that verified terms are not available in the current policy evidence. Do not infer warranty coverage from a product category, customer tier, return window, price, or order status. ## Separate decisions A return-refund eligibility decision is not a warranty approval. The current application does not register warranty claims, authorize repairs, or dispatch replacements. It must not claim those actions have occurred.",
+          "score": 0.644184410572052,
+          "source": "s3://<policy-bucket>/policies/warranty/warranty-v1.md"
+        }
+      ]
+    }
+  },
+  "seed": {
+    "reference_time": "2026-10-18T11:51:21.684590+00:00",
+    "customers_created": 0,
+    "customers_skipped": 2,
+    "orders_created": 0,
+    "orders_skipped": 4
+  },
+  "release_image": {
+    "status": "pushed",
+    "tag": "8a95621",
+    "index_digest": "sha256:a8d521e05243779a40847c5b5f3daf4f0e32319f4636e9471a611e308051e90b",
+    "architecture": "linux/arm64",
+    "size_bytes": 126993332,
+    "application_manifest_digest": "sha256:6ba82653c544943b9c0aebb1c5859580247bbdad09ebbb443c124ba38c65e171",
+    "local_smoke": {
+      "commit": "8a95621420a0b5ae4ea9fdff4e52993ad4abc732",
+      "image": "novamart-support:8a95621",
+      "image_id": "sha256:a8d521e05243779a40847c5b5f3daf4f0e32319f4636e9471a611e308051e90b",
+      "architecture": "arm64",
+      "user": "10001:10001",
+      "ok": true,
+      "health": {
+        "status": "Healthy",
+        "time_of_last_update": 1792323211
+      },
+      "container_removed": true
+    },
+    "scan": {
+      "status": "COMPLETE",
+      "severity_counts": {
+        "HIGH": 7,
+        "MEDIUM": 4,
+        "LOW": 2
+      },
+      "findings": [
+        {
+          "id": "CVE-2026-95818",
+          "severity": "LOW",
+          "packages": {
+            "package_version": "2.36-9+deb12u14",
+            "package_name": "glibc"
+          }
+        },
+        {
+          "id": "CVE-2026-53613",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-78408",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-78409",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-78410",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-53615",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-85977",
+          "severity": "MEDIUM",
+          "packages": {
+            "package_version": "1.3.3+ds-1",
+            "package_name": "libtirpc"
+          }
+        },
+        {
+          "id": "CVE-2026-97399",
+          "severity": "LOW",
+          "packages": {
+            "package_version": "2.36-9+deb12u14",
+            "package_name": "glibc"
+          }
+        },
+        {
+          "id": "CVE-2026-76642",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-85091",
+          "severity": "HIGH",
+          "packages": {
+            "package_version": "1.2.13.dfsg-1",
+            "package_name": "zlib"
+          }
+        },
+        {
+          "id": "CVE-2026-13595",
+          "severity": "MEDIUM",
+          "packages": {
+            "package_version": "2.38.1-5+deb12u3",
+            "package_name": "util-linux"
+          }
+        },
+        {
+          "id": "CVE-2026-85231",
+          "severity": "MEDIUM",
+          "packages": {
+            "package_version": "1.3.3+ds-1",
+            "package_name": "libtirpc"
+          }
+        },
+        {
+          "id": "CVE-2026-86805",
+          "severity": "MEDIUM",
+          "packages": {
+            "package_version": "2.36-9+deb12u14",
+            "package_name": "glibc"
+          }
+        }
+      ]
+    }
+  },
+  "agentcore": {
+    "status": "creation_denied",
+    "attempts": 3,
+    "hosted_acceptance": "not_run",
+    "tagging_repair_resolved_failure": false,
+    "additional_permission_status": "owner_approved_applied_and_verified",
+    "diagnostic_limit": "All three attempts returned generic CloudFormation AccessDenied; organization policy blocks CloudTrail lookup. Precise denied API or condition remains unconfirmed.",
+    "cloudformation_status": "ROLLBACK_COMPLETE",
+    "rollback_resources_deleted": true,
+    "novamart_runtime_exists": false,
+    "additional_permission_resolved_failure": false
+  },
+  "corrected_candidate": {
+    "tag": "8a95621-decimal-fix",
+    "index_digest": "sha256:76e0870b3994590a20179b11c07d68af8bca234d9b313783725dc4454ce91276",
+    "application_manifest_digest": "sha256:4acc57caa9d4852ff4e5226407c03450876d373a33769b10853df57273307081",
+    "source_state": "base revision 8a95621 plus uncommitted Decimal repair",
+    "application_source_sha256": "ee8e3ed8e5c84aaa5ee41b1db5fdfc5b2f84a931e9d70f6133aa0fde3e32dc13",
+    "container_checks_passed": 7,
+    "container_removed": true,
+    "scan_status": "COMPLETE",
+    "scan_severity_counts": {
+      "HIGH": 7,
+      "MEDIUM": 4,
+      "LOW": 2
+    }
+  },
+  "live_application": {
+    "execution": "Local application using live AWS, not hosted AgentCore",
+    "report": "live-application.json",
+    "scenarios_passed": [
+      "policy",
+      "refund",
+      "order"
+    ],
+    "summary_matches_dynamodb": true,
+    "terminal_resume_unchanged": true,
+    "quality_limits": [
+      "Currency symbol not specified by source schema",
+      "Delivery soon language lacks an estimate"
+    ],
+    "formal_evaluation": false
+  },
+  "communication_candidate": {
+    "tag": "8a95621-communication-v1",
+    "index_digest": "sha256:39ef89bf8e37b3ba1f29344f02cb5ce856319ae714645baa44422354565ba461",
+    "application_manifest_digest": "sha256:05f65258af4dcd4d6bb7aa9c66499da9b0d93736abf36dbbc0386d517b3a647b",
+    "source_state": "Uncommitted working tree on 8a95621: Decimal prompt serialization and communication grounding repairs.",
+    "base_image": "python:3.12-slim-bookworm",
+    "base_unchanged": true,
+    "application_source_sha256": "eae5a8b17450decc7c7d66ac5fc198e40c95287d6dcf1e725cf58fa2b3b1ad3c",
+    "container_checks_passed": 7,
+    "container_removed": true,
+    "scan_status": "COMPLETE",
+    "scan_severity_counts": {
+      "HIGH": 7,
+      "MEDIUM": 4,
+      "LOW": 2
+    },
+    "risk_status": "Not security-cleared; unresolved OS findings; no waiver.",
+    "hosted_runtime": "Not deployed; creation remains denied."
+  },
+  "communication_evaluation": {
+    "report": "communication-eval.json",
+    "scope": "CommunicationAgent only with live Bedrock and in-memory fixtures",
+    "automated_cases_passed": 5,
+    "human_review": "pending",
+    "formal_security_acceptance": false
+  },
+  "current_deployment_candidate": "communication_candidate"
+}

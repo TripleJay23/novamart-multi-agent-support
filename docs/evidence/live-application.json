@@ -1,0 +1,80 @@
+{
+  "captured_at": "2026-10-18T12:11:55.674895+00:00",
+  "execution": "local application with live AWS models, KBs, and DynamoDB; not AgentCore hosting",
+  "base_revision": "8a95621420a0b5ae4ea9fdff4e52993ad4abc732",
+  "working_tree_change": "Decimal-safe specialist prompt serialization",
+  "execution_source_sha256": "00b9e067616eb1fed9b6a443c46f060fc306110f4010efd61299f487acba3839",
+  "ok": true,
+  "checks": [
+    {
+      "scenario": "policy",
+      "query": "What is the return window for premium customers?",
+      "elapsed_seconds": 25.297,
+      "summary": {
+        "session_id": "<policy-workflow>",
+        "customer_id": null,
+        "request_type": "policy",
+        "status": "completed",
+        "route_history": [
+          "PolicyAgent",
+          "CommunicationAgent"
+        ],
+        "final_response": "Thank you for your question about our return policy for premium customers.\n\n**Premium customers have a 60-day return window from the delivery date.**\n\nFor comparison, standard customers have a 30-day return window from delivery.\n\nTo be eligible for a return, your order must:\n- Have a delivered status\n- Have a recorded delivery date (not in the future)\n- Have return eligibility enabled\n- Not already be refunded\n\nThe return window is calculated using whole elapsed days from your delivery date.\n\nIf you have a specific order you'd like to check for return eligibility, I'd be happy to help you with that as well.",
+        "version": 2
+      },
+      "persistence_matches": true,
+      "terminal_resume_unchanged": true
+    },
+    {
+      "scenario": "refund",
+      "query": "Am I eligible for a refund for delivered order ORD-1001? Give the eligible amount, without issuing a payment.",
+      "elapsed_seconds": 34.578,
+      "summary": {
+        "session_id": "<refund-workflow>",
+        "customer_id": "CUST-1001",
+        "request_type": "return_refund",
+        "status": "completed",
+        "route_history": [
+          "InventoryAgent",
+          "RefundAgent",
+          "CommunicationAgent"
+        ],
+        "final_response": "Hello <demo customer>,\n\nThank you for contacting NovaMart support.\n\nI've reviewed your order ORD-1001 for the Wireless Headphones Pro. You are **eligible for a refund** of **$149.99**.\n\nYour order was delivered on September 21, 2026, and as a premium tier customer, you have a 60-day return window. Your request falls within this timeframe.\n\nAs requested, I have not processed the refund payment at this time. When you're ready to proceed with the return and refund, please let us know and we'll be happy to assist you with the next steps.\n\nIf you have any questions, feel free to reach out.\n\nBest regards,  \nNovaMart Customer Support",
+        "version": 3
+      },
+      "persistence_matches": true,
+      "terminal_resume_unchanged": true,
+      "persisted_refund_context": {
+        "evaluation_completed": true,
+        "refund_evaluation": {
+          "customer_id": "CUST-1001",
+          "eligible": true,
+          "order_id": "ORD-1001",
+          "reason": "Order is within the 60-day premium return window.",
+          "refund_amount": "149.99"
+        },
+        "refund_processed": false
+      }
+    },
+    {
+      "scenario": "order",
+      "query": "What is the current delivery status of order ORD-1002?",
+      "elapsed_seconds": 22.75,
+      "summary": {
+        "session_id": "<order-workflow>",
+        "customer_id": "CUST-1001",
+        "request_type": "order",
+        "status": "completed",
+        "route_history": [
+          "InventoryAgent",
+          "CommunicationAgent"
+        ],
+        "final_response": "Hello <demo customer>,\n\nThank you for contacting NovaMart regarding your order ORD-1002.\n\nYour Smart Watch Series 5 is currently **shipped** and on its way to you. The order was placed on September 28, 2026, and is in transit for delivery.\n\nYou should receive your item soon. If you have any questions or need further assistance once your order arrives, please don't hesitate to reach out.\n\nBest regards,  \nNovaMart Customer Support",
+        "version": 2
+      },
+      "persistence_matches": true,
+      "terminal_resume_unchanged": true
+    }
+  ],
+  "acceptance_limit": "Three smoke scenarios; no formal quality, latency, safety, or hosted-runtime acceptance. Generated currency and delivery language need review."
+}

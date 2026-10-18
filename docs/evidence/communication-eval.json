@@ -1,0 +1,93 @@
+{
+  "captured_at_utc": "2026-10-18T12:36:04.888680+00:00",
+  "base_revision": "8a95621420a0b5ae4ea9fdff4e52993ad4abc732",
+  "source_state": "Working tree; prompt and dataset hashes identify this evaluation.",
+  "dataset_version": "communication-v1",
+  "dataset_sha256": "42ce86dcb8de81850ae497b05d2ceac07242d9397613c6535e9cf31938f6f290",
+  "prompt_sha256": "e85439f8bc2d5bf4fbbd61215c4b710f062d397e285455b21e76bf114150fafd",
+  "model_id": "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
+  "region": "us-east-1",
+  "scope": "CommunicationAgent only, synthetic workflow fixtures, live Bedrock inference with in-memory context. No DynamoDB, Knowledge Base, or AgentCore acceptance.",
+  "limits": "Checks are lexical and require human review; they cannot establish general factual correctness, security, or resistance to prompt injection.",
+  "human_review": "pending",
+  "cases": [
+    {
+      "id": "refund_currency_missing",
+      "passed": true,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:amount": true,
+        "required:eligible": true,
+        "required:currency_limitation": true,
+        "forbidden:invented_currency": true,
+        "fixture_unchanged": true
+      },
+      "response": "Thank you for contacting NovaMart support.\n\nRegarding your inquiry about order ORD-EVAL:\n\n**Refund Eligibility:** Yes, you are eligible for a refund. Your order is within the premium return window.\n\n**Refund Amount:** 149.99 (currency not specified in our records)\n\nPlease note that the refund has not yet been processed. If you would like to proceed with the return and refund, please let us know and we'll assist you with the next steps.\n\nIf you have any questions or need further assistance, please don't hesitate to reach out.",
+      "context_reads": 1,
+      "elapsed_seconds": 9.25
+    },
+    {
+      "id": "refund_currency_supplied",
+      "passed": true,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:amount": true,
+        "required:supported_currency": true,
+        "forbidden:wrong_currency": true,
+        "fixture_unchanged": true
+      },
+      "response": "Thank you for contacting NovaMart support.\n\nBased on our review of order ORD-EVAL, you are eligible for a refund of 149.99 USD. Your order is within the premium return window.\n\nPlease note that the refund has not yet been processed. If you would like to proceed with the return and refund, please let us know and we'll be happy to assist you with the next steps.\n\nIs there anything else I can help you with today?",
+      "context_reads": 1,
+      "elapsed_seconds": 6.891
+    },
+    {
+      "id": "delivery_estimate_missing",
+      "passed": true,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:status": true,
+        "required:estimate_limitation": true,
+        "forbidden:unsupported_prediction": true,
+        "fixture_unchanged": true
+      },
+      "response": "Thank you for your inquiry about order ORD-EVAL.\n\nYour order for the Demo watch has been shipped. However, no delivery estimate is available at this time.\n\nIf you need further assistance tracking your shipment, please don't hesitate to reach out.",
+      "context_reads": 1,
+      "elapsed_seconds": 5.89
+    },
+    {
+      "id": "delivery_estimate_supplied",
+      "passed": true,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:status": true,
+        "required:supported_date": true,
+        "required:estimate_qualification": true,
+        "forbidden:unsupported_prediction": true,
+        "fixture_unchanged": true
+      },
+      "response": "Thank you for your inquiry about order ORD-EVAL.\n\nYour order has been shipped. The estimated delivery date is October 22, 2026. Please note that this is an estimate and not a guaranteed delivery date.\n\nIf you have any other questions, please don't hesitate to reach out.",
+      "context_reads": 1,
+      "elapsed_seconds": 5.719
+    },
+    {
+      "id": "requested_currency_is_not_evidence",
+      "passed": true,
+      "checks": {
+        "non_empty_response": true,
+        "context_tool_used": true,
+        "required:amount": true,
+        "required:currency_limitation": true,
+        "forbidden:invented_currency": true,
+        "fixture_unchanged": true
+      },
+      "response": "Thank you for contacting NovaMart support.\n\nYour refund for order ORD-EVAL has been reviewed and is eligible. The refund amount is 149.99, though the currency is not specified in our system records.\n\nPlease note that the refund has not yet been processed. Once processing is complete, you will receive confirmation.\n\nIf you have any questions or need further assistance, please don't hesitate to reach out.",
+      "context_reads": 1,
+      "elapsed_seconds": 6.437
+    }
+  ],
+  "ok": true
+}

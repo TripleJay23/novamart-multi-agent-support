@@ -1,0 +1,20 @@
+Working tree based on 8a95621, including Decimal serialization and CommunicationAgent grounding repairs.
+
+Command: uv run --locked --extra dev pytest -q --junitxml=cdk.out/release/pytest-communication.xml
+........................................................................ [ 36%]
+........................................................................ [ 73%]
+...................................................                      [100%]
+============================== warnings summary ===============================
+tests/unit/test_agentcore_entrypoint.py::test_sdk_http_contract_supports_health_and_invocation
+  .\.venv\Lib\site-packages\bedrock_agentcore\runtime\app.py:47: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "timestamp": datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z",
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: .\cdk.out\release\pytest-communication.xml -
+195 passed, 1 warning in 16.14s
+
+Command: uv run --locked --extra dev ruff check .
+All checks passed!
+
+Command: uv run --locked --extra dev mypy src/novamart_support
+Success: no issues found in 45 source files

@@ -1,0 +1,87 @@
+{
+  "captured_at_utc": "2026-10-18T12:42:08.597752+00:00",
+  "image_tag": "novamart-support:communication-trixie",
+  "scope": "Local ARM64 container only; no AWS credentials, mounts, or model calls.",
+  "checks": [
+    {
+      "name": "non_root_without_credentials_or_mounts",
+      "passed": true
+    },
+    {
+      "name": "installed_source_matches_working_tree",
+      "passed": true
+    },
+    {
+      "name": "health_endpoint",
+      "passed": true,
+      "response": {
+        "status": "Healthy",
+        "time_of_last_update": 1792327378
+      }
+    },
+    {
+      "name": "missing_session",
+      "passed": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Provide a valid run or resume request and a 33-256 character runtime session ID."
+        }
+      }
+    },
+    {
+      "name": "missing_query",
+      "passed": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Provide a valid run or resume request and a 33-256 character runtime session ID."
+        }
+      }
+    },
+    {
+      "name": "session_override",
+      "passed": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "invalid_request",
+          "message": "Provide a valid run or resume request and a 33-256 character runtime session ID."
+        }
+      }
+    },
+    {
+      "name": "missing_cloud_configuration",
+      "passed": true,
+      "response": {
+        "ok": false,
+        "error": {
+          "code": "configuration_error",
+          "message": "The support service is not configured correctly."
+        }
+      }
+    }
+  ],
+  "ok": true,
+  "image": {
+    "id": "sha256:926a8a490a8cc5517112c39960f0e6093f15356d3c126ef001b9067e661b2425",
+    "os": "linux",
+    "architecture": "arm64",
+    "user": "10001:10001",
+    "command": [
+      "/app/.venv/bin/python",
+      "-m",
+      "novamart_support.agentcore"
+    ],
+    "repo_digests": [
+      "novamart-support@sha256:926a8a490a8cc5517112c39960f0e6093f15356d3c126ef001b9067e661b2425"
+    ]
+  },
+  "container_id": "7c78b42d79c7f6e15077eff6d2dfa26efb4e493d36384bb8882c3392b803c2a5",
+  "python_version": "Python 3.12.15",
+  "machine": "aarch64",
+  "application_source_sha256": "eae5a8b17450decc7c7d66ac5fc198e40c95287d6dcf1e725cf58fa2b3b1ad3c",
+  "container_removed": true
+}

@@ -1,0 +1,9 @@
+{
+  "captured_at_utc": "2026-10-18T12:50:28.099987+00:00",
+  "action": "cloudtrail:LookupEvents",
+  "region": "us-east-1",
+  "lookup_allowed": false,
+  "error_code": "AccessDeniedException",
+  "http_status": 400,
+  "explicit_service_control_policy_deny": true
+}
